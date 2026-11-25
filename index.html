@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Favorite Person ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+}
+
+body {
+  background: #1a080c;
+  color: white;
+  overflow-x: hidden;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 35px 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: fade 0.8s ease;
+}
+
+.page.active {
+  display: flex;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-size: clamp(30px, 7vw, 45px);
+  color: #ffe1e7;
+  text-shadow: 2px 2px 5px #660c20;
+  margin-bottom: 15px;
+}
+
+h2 {
+  color: #ffd0dc;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+p {
+  max-width: 600px;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #ffe9ed;
+  margin: 12px auto;
+}
+
+.btn {
+  margin-top: 25px;
+  padding: 13px 30px;
+  border: none;
+  border-radius: 30px;
+  background: #fff0f3;
+  color: #a31338;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn:hover {
+  transform: scale(1.07);
+  background: #ffc4d1;
+}
+
+/* ENVELOPE */
+
+#page1 {
+  background:
+    linear-gradient(#22070b99,#22070b99),
+    url('assets/love.jpg')
+    center/cover;
+}
+
+.envelope {
+  width: min(320px, 85vw);
+  height: 200px;
+  background: #b51f36;
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 15px 40px #0009;
+  transition: .4s;
+}
+
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: min(160px, 42.5vw) solid transparent;
+  border-right: min(160px, 42.5vw) solid transparent;
+  border-top: 110px solid #e43b54;
+  z-index: 2;
+}
+
+.seal {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65px;
+  height: 65px;
+  background: #f5cf73;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  z-index: 3;
+}
+
+.mail-text {
+  margin-top: 30px;
+  font-size: 30px;
+  font-style: italic;
+  color: white;
+}
+
+.click {
+  margin-top: 12px;
+  background: white;
+  color: #a31338;
+  padding: 9px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* PHOTO GALLERY */
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 700px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.photos img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border: 4px solid white;
+  border-radius: 10px;
+  transition: .3s;
+}
+
+.photos img:hover {
+  transform: scale(1.05);
+}
+
+/* LETTER */
+
+.letter-box {
+  background: #fff5f5;
+  color: #5b2530;
+  padding: 28px;
+  border-radius: 15px;
+  max-width: 620px;
+  width: 100%;
+  text-align: left;
+  line-height: 1.9;
+  box-shadow: 0 10px 35px #0005;
+}
+
+.letter-box p {
+  color: #63333e;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* VINYL */
+
+.vinyl {
+  width: 190px;
+  height: 190px;
+  background: repeating-radial-gradient(
+    circle, #222 0px, #222 5px,
+    #111 7px, #111 10px
+  );
+  border: 5px solid #333;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 30px auto;
+  animation: spin 5s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl.playing {
+  animation-play-state: running;
+}
+
+.vinyl div {
+  width: 60px;
+  height: 60px;
+  background: #c12745;
+  border: 5px solid #e8a4b1;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* FLOATING HEARTS */
+
+.floating {
+  position: fixed;
+  bottom: -30px;
+  pointer-events: none;
+  animation: float 6s linear forwards;
+  z-index: 10;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width: 550px) {
+  .photos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photos img {
+    height: 140px;
+  }
+
+  .letter-box {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<div class="page active" id="page1">
+
+  <div class="envelope" onclick="nextPage(2)">
+    <div class="seal">❤️</div>
+  </div>
+
+  <div class="mail-text">A Little Surprise For You!</div>
+  <div class="click">Open your letter 💌</div>
+
+  <p>I made something special for my favorite person. ❤️</p>
+
+</div>
+
+
+<!-- PAGE 2 -->
+
+<div class="page" id="page2" style="background:#79172b">
+
+  <h2>Hey, My Love! ❤️</h2>
+  <h1>You're So Special To Me!</h1>
+
+  <p>
+    I just want to remind you how much you mean to me.
+    You make my ordinary days feel special,
+    and I'm so thankful to have someone like you
+    in my life.
+  </p>
+
+  <img
+    src="3rd sketch.jpg"
+    style="width:90%;max-width:500px;border-radius:15px;border:5px solid white;margin-top:15px"
+    alt="A special memory"
+  >
+
+  <button class="btn" onclick="nextPage(3)">
+    Next ➜
+  </button>
+
+</div>
+
+
+<!-- PAGE 3 -->
+
+<div class="page" id="page3" style="background:#92253c">
+
+  <h1>Our Little Memories ❤️</h1>
+
+  <p>
+    Every picture holds a memory,
+    every moment has a story,
+    and every memory becomes special
+    because you're part of it.
+    I hope we make many more together.
+  </p>
+
+  <div class="photos">
+
+    <img src="backback.jpg" alt="Memory 1">
+    <img src="2nd sketch.jpg" alt="Memory 2">
+    <img src="mocha.jpg" alt="Memory 3">
+    <img src="4th sketch.jpg" alt="Memory 4">
+    <img src="logo.jpg" alt="Memory 5">
+    <img src="first sketch.jpg" alt="Memory 6">
+
+  </div>
+
+  <button class="btn" onclick="nextPage(4)">
+    Next ➜
+  </button>
+
+</div>
+
+
+<!-- PAGE 4 -->
+
+<div class="page" id="page4" style="background:#651329">
+
+  <h2>MY FAVORITE PERSON</h2>
+  <h1>THAT'S YOU, MY Baby! ❤️</h1>
+
+  <img
+    src="4th sketch.jpg"
+    style="width:90%;max-width:500px;border-radius:15px;border:5px solid white"
+    alt="Love"
+  >
+
+  <p>
+    You're my favorite hello,
+    my safe place, my happiness,
+     my future Criminology
+    and the person I always want beside me.
+  </p>
+
+  <button class="btn" onclick="nextPage(5)">
+    Read My Letter 💌
+  </button>
+
+</div>
+
+
+<!-- PAGE 5: LOVE LETTER -->
+
+<div class="page" id="page5" style="background:#841b32">
+
+  <h1>A Letter For You 💌</h1>
+
+  <div class="letter-box">
+
+    <b>To My Favorite Person, ❤️</b>
+
+    <p>
+      My baby/love,
+      <br><br>
+
+      I don't know where to start, but I just want you
+      to know how thankful I am to have you.
+      I'm really lucky to have someone like you in my life.
+      <br><br>
+
+      Thank you for making me smile even on days when
+      I don't feel okay. Thank you for your patience,
+      your understanding, your love, and for all the
+      little things you do. Sometimes I may not say it,
+      but I notice and appreciate everything.
+      <br><br>
+
+      I know I'm not a perfect partner. I have my flaws,
+      my mistakes, and moments when I don't know how
+      to express what I feel. I'm sorry for the times
+      I make you sad, for the times I misunderstand you,
+      and for the moments I fall short.
+      I promise to keep learning and growing with you.
+      <br><br>
+
+      I want you to know that you never have to be
+      perfect just to be loved by me. You can be yourself
+      around me. You can have bad days, make mistakes,
+      and show your vulnerable side. I want to be someone
+      you can run to whenever the world feels too heavy.
+      <br><br>
+
+      I love your smile, your laugh, your little habits,
+      your personality, and even the simplest things
+      about you. It's not just the happy moments that
+      make me love you. It's also the ordinary days,
+      the random conversations, the silly jokes,
+      and even the quiet moments when we're together.
+      <br><br>
+
+      I know that sometimes distance makes things
+      difficult for us. There are days when I wish
+      I could be beside you, hug you, hold your hand,
+      and tell you how much I love you in person.
+      But kahit malayo man tayo sa isa't isa,
+      ikaw at ikaw pa rin ang mamahalin ko.
+      No matter how many miles separate us,
+      my heart will always choose you.
+      I hope that someday, we won't have to miss
+      each other from afar because we'll finally
+      be together.
+      <br><br>
+
+      I also hope na matupad natin lahat ng pangarap
+      natin sa buhay. I want us to become successful
+      someday, achieve our goals, and build the future
+      we've always dreamed of. Gusto kong makita kang
+      maabot lahat ng pangarap mo, and I hope I get
+      to be by your side while you're making them happen.
+      I want us to look back someday and be proud
+      of everything we've worked hard for.
+      <br><br>
+
+      Alam kong hindi naman palaging masaya
+      ang relationship natin. We have misunderstandings,
+      arguments, tampuhan, and sometimes we hurt
+      each other's feelings. But despite all those
+      arguments, ikaw at ikaw pa rin ang pipiliin ko.
+      I know we aren't perfect, but I hope we never
+      get tired of understanding, forgiving,
+      and choosing each other.
+      <br><br>
+
+      Let's learn to communicate better, be more patient,
+      and never let our pride become bigger than
+      our love for each other. I don't want us to give up
+      just because things get difficult.
+      I want us to grow together and face every challenge
+      hand in hand. Ikaw pa rin hanggang dulo, my love.
+      <br><br>
+
+      And baby, malapit ka na mag-graduate!
+      I'm so proud of you, and I hope you know that.
+      Pagbutihin mo pa ang pag-aaral mo, okay?
+      Always do your best, stay focused,
+      and don't give up kahit nakakapagod na.
+      I know there will be difficult days,
+      but please remember that you are capable
+      of achieving your dreams.
+      <br><br>
+
+      I believe in you so much, and I'll always be here
+      to support and encourage you. I can't wait
+      to see you wearing your toga and receiving
+      the diploma you've worked so hard for.
+      I hope I get to witness more of your achievements
+      and celebrate every little victory with you.
+      Always remember that I'm so proud of you.
+      <br><br>
+
+      I don't know what the future holds,
+      but I hope I get to experience it with you.
+      I want more dates, more hugs, more kisses,
+      more random adventures, and more memories.
+      I want to see you achieve your dreams
+      and be there to support you along the way.
+      <br><br>
+
+      Please never forget that you're important to me.
+      Even when I get busy, even when we have
+      misunderstandings, and even when things aren't
+      easy, my love and appreciation for you are still here.
+      <br><br>
+
+      If there's one thing I want you to remember,
+      it's that I'm happy it's you. Out of all the people
+      in this world, you're the person I want to love,
+      care for, and choose every single day.
+      <br><br>
+
+      Thank you for being you. Thank you for being
+      part of my life. And thank you for giving me
+      so many reasons to smile.
+      <br><br>
+
+      I may not be able to give you everything
+      in this world, but I promise to give you
+      genuine love, effort, honesty, and care.
+      I promise to support your dreams,
+      celebrate your achievements, and love you
+      even on the days when things aren't easy.
+      <br><br>
+
+      I love you so much, my baby.
+      More than these words could ever explain.
+      I hope this little surprise makes you smile,
+      because you deserve all the love and happiness
+      in this world.
+      <br><br>
+
+      <b>
+        No matter how far we are, no matter how many
+        arguments we have, and no matter what challenges
+        life brings, I hope it's still you and me in the end.
+        I want to grow with you, succeed with you,
+        and build the future we've always dreamed of.
+        Ikaw at ikaw pa rin, hanggang dulo. ❤️
+      </b>
+
+      <br><br>
+
+      <b>Always yours,</b><br>
+      <i>Your Comsci. ❤️</i>
+
+    </p>
+
+  </div>
+
+  <button class="btn" onclick="nextPage(6)">
+    One Last Surprise ➜
+  </button>
+
+</div>
+
+
+  <button class="btn" onclick="nextPage(6)">
+    One Last Surprise ➜
+  </button>
+
+</div>
+
+
+<!-- PAGE 6 -->
+
+<div class="page" id="page6" style="background:#170b10">
+
+  <h1>One Last Thing... ❤️</h1>
+
+  <div class="vinyl" id="vinyl">
+    <div></div>
+  </div>
+
+  <h2>A Song For You 🎶</h2>
+
+  <p>
+    Every love song reminds me of you.
+    I hope this song reminds you how much
+    you mean to me.
+  </p>
+
+  <audio id="loveSong" loop>
+    <source src="Backstreet Boys - As Long As You Love Me (Lyrics) [nrpe7rCtXFM].mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="btn" id="musicBtn" onclick="toggleMusic()">
+    ▶ Play Music
+  </button>
+
+  <h2 style="margin-top:30px">
+    I LOVE YOU, ALWAYS. 💗
+  </h2>
+
+  <p>
+    No special occasion is needed to remind you
+    how much I love you.
+    You're my favorite person,
+    my favorite choice, and my favorite love story.
+  </p>
+
+  <button class="btn" onclick="nextPage(1)">
+    ↺ Read Again
+  </button>
+
+</div>
+
+
+<script>
+
+// PAGE NAVIGATION
+
+function nextPage(number) {
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page" + number).classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+// FLOATING HEARTS
+
+function createHeart() {
+
+  const heart = document.createElement("div");
+
+  heart.className = "floating";
+
+  heart.innerHTML = ["❤️", "💕", "💗", "💖", "💘"][
+    Math.floor(Math.random() * 5)
+  ];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 8000);
+
+}
+
+setInterval(createHeart, 600);
+
+
+// MUSIC PLAYER
+
+const song = document.getElementById("loveSong");
+const vinyl = document.getElementById("vinyl");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic() {
+
+  if (song.paused) {
+
+    song.play().then(() => {
+      vinyl.classList.add("playing");
+      musicBtn.innerHTML = "⏸ Pause Music";
+    }).catch(() => {
+      alert("Please add your music file named your-song.mp3!");
+    });
+
+  } else {
+
+    song.pause();
+    vinyl.classList.remove("playing");
+    musicBtn.innerHTML = "▶ Play Music";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
